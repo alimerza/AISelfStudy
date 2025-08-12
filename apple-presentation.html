@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple's Five-Year Evolution Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .presentation-container {
+            width: 100%;
+            max-width: 1100px;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+        }
+        .slide {
+            display: none;
+            flex-grow: 1;
+            padding: 3rem 4rem;
+        }
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-container {
+            position: relative;
+            flex-grow: 1;
+            width: 100%;
+            max-height: 70%;
+        }
+        .nav-button {
+            transition: background-color 0.2s ease-in-out;
+        }
+        .nav-button:hover {
+            background-color: #e5e7eb;
+        }
+        .slide-title {
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        .slide-commentary {
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body class="antialiased flex items-center justify-center min-h-screen p-4 bg-gray-100">
+
+    <div class="presentation-container bg-white rounded-lg">
+        <!-- Slide 1: Title -->
+        <div id="slide-1" class="slide active items-center justify-center text-center">
+            <h1 class="text-6xl font-black text-gray-800">Apple's Five-Year Evolution</h1>
+            <p class="text-3xl font-light text-gray-500 mt-4">A Financial Journey from 2019 to 2024</p>
+        </div>
+
+        <!-- Slide 2: Total Net Sales -->
+        <div id="slide-2" class="slide">
+            <h2 class="text-3xl slide-title">The Growth Engine: Total Net Sales</h2>
+            <p class="slide-commentary mb-4">Over the past five years, Apple's total net sales have shown remarkable growth, surging from £213 billion in 2019 to £321 billion in 2024. This represents a compound annual growth rate of over 8.5%. This trajectory, despite a minor dip in 2023, highlights the company's sustained expansion and powerful market position.</p>
+            <div class="chart-container">
+                <canvas id="totalSalesChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Revenue Mix -->
+        <div id="slide-3" class="slide">
+             <h2 class="text-3xl slide-title">The Shifting Revenue Mix</h2>
+             <p class="slide-commentary mb-4">While the iPhone remains the cornerstone of revenue, the Services division has more than doubled its contribution since 2019, growing from 18% to nearly 30% of total sales. This strategic pivot towards a high-margin, recurring revenue model is critical in reducing dependency on hardware upgrade cycles and building a more resilient and predictable business.</p>
+            <div class="chart-container">
+                <canvas id="revenueMixChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Slide 4: R&D -->
+        <div id="slide-4" class="slide">
+            <h2 class="text-3xl slide-title">Investing in the Future: R&D</h2>
+             <p class="slide-commentary mb-4">Apple's commitment to innovation is clear from its escalating Research & Development spending, which has almost doubled from £13 billion in 2019 to over £26 billion in 2024. This aggressive investment directly fuels future growth platforms like Apple Intelligence and Vision Pro, and is essential for maintaining a competitive edge in the fast-evolving tech landscape.</p>
+            <div class="chart-container">
+                <canvas id="rdSpendChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Slide 5: Profitability -->
+        <div id="slide-5" class="slide">
+            <h2 class="text-3xl slide-title">Profitability & Shareholder Value</h2>
+            <p class="slide-commentary mb-4">Net income has seen substantial growth, providing the financial power for a massive capital return programme. In 2024 alone, the company returned over £90 billion to shareholders, exceeding its net income for the year. This demonstrates a balanced strategy of investing for the future while delivering significant, immediate value back to shareholders.</p>
+            <div class="chart-container">
+                <canvas id="netIncomeChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Slide 6: Summary -->
+        <div id="slide-6" class="slide justify-center">
+            <h2 class="text-3xl slide-title">Key Takeaways</h2>
+            <ul class="list-disc pl-5 space-y-4 text-xl slide-commentary">
+                <li><span class="font-semibold text-gray-800">Sustained Growth:</span> Apple has achieved over 50% growth in net sales over five years, demonstrating strong market demand.</li>
+                <li><span class="font-semibold text-gray-800">Strategic Pivot to Services:</span> The Services division has become a major revenue and profit engine, creating a more stable and predictable business model.</li>
+                <li><span class="font-semibold text-gray-800">Commitment to Innovation:</span> A near-doubling of R&D spending highlights a focus on developing next-generation technologies.</li>
+                <li><span class="font-semibold text-gray-800">Shareholder-Focused:</span> Robust profitability funds an aggressive capital return programme that consistently delivers value to investors.</li>
+            </ul>
+            <p class="text-sm text-gray-400 mt-auto">*Data sourced from Apple Inc. Fiscal Year 2019, 2021, 2022, 2023 & 2024 Form 10-K Reports. All figures in British Pounds, converted from USD for illustrative purposes.</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex items-center justify-between p-4 border-t border-gray-200">
+            <span id="slide-counter" class="text-sm text-gray-500">Slide 1 of 6</span>
+            <div>
+                <button id="prev-btn" class="nav-button px-4 py-2 rounded-md font-semibold text-gray-700 border border-gray-300">Previous</button>
+                <button id="next-btn" class="nav-button px-4 py-2 rounded-md font-semibold text-gray-700 border border-gray-300">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentSlide = 1;
+            const totalSlides = 6;
+            const slides = document.querySelectorAll('.slide');
+            const slideCounter = document.getElementById('slide-counter');
+
+            const CHART_COLORS = {
+                red: '#dc2626',
+                slate: '#475569',
+                midGrey: '#94a3b8',
+                lightGrey: '#e2e8f0',
+                grid: 'rgba(0, 0, 0, 0.05)',
+                text: '#4b5563',
+                textDark: '#1f2937'
+            };
+
+            const years = ['2019', '2021', '2022', '2023', '2024'];
+            const usdToGbp = 0.82;
+
+            const updateSlide = () => {
+                slides.forEach(slide => slide.classList.remove('active'));
+                document.getElementById(`slide-${currentSlide}`).classList.add('active');
+                slideCounter.textContent = `Slide ${currentSlide} of ${totalSlides}`;
+                document.getElementById('prev-btn').disabled = currentSlide === 1;
+                document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+            };
+
+            document.getElementById('next-btn').addEventListener('click', () => {
+                if (currentSlide < totalSlides) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            });
+
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                if (currentSlide > 1) {
+                    currentSlide--;
+                    updateSlide();
+                }
+            });
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) return label.join(' ');
+                return label;
+            };
+            
+            // Chart Data
+            const salesData = [260.174, 365.817, 394.328, 383.285, 391.035].map(v => (v * usdToGbp).toFixed(1));
+            const revenueData = {
+                'iPhone': [142.381, 191.973, 205.489, 200.583, 201.183].map(v => (v * usdToGbp).toFixed(1)),
+                'Services': [46.291, 68.425, 78.129, 85.200, 96.169].map(v => (v * usdToGbp).toFixed(1)),
+                'Mac': [25.740, 35.190, 40.177, 29.357, 29.984].map(v => (v * usdToGbp).toFixed(1)),
+                'Wearables etc.': [24.482, 38.367, 41.241, 39.845, 37.005].map(v => (v * usdToGbp).toFixed(1)),
+                'iPad': [21.280, 31.862, 29.292, 28.300, 26.694].map(v => (v * usdToGbp).toFixed(1)),
+            };
+            const rdData = [16.217, 21.914, 26.251, 29.915, 31.370].map(v => (v * usdToGbp).toFixed(1));
+            const incomeData = [55.256, 94.680, 99.803, 96.995, 93.736].map(v => (v * usdToGbp).toFixed(1));
+            const returnsData = [81.23, 100, 105, 92.042, 110.2].map(v => (v * usdToGbp).toFixed(1));
+
+            // Chart Initializations
+            new Chart(document.getElementById('totalSalesChart').getContext('2d'), {
+                type: 'line', data: { labels: years, datasets: [{ label: 'Total Net Sales (£ Billions)', data: salesData, backgroundColor: 'rgba(220, 38, 38, 0.1)', borderColor: CHART_COLORS.red, borderWidth: 3, fill: true, tension: 0.4, pointBackgroundColor: CHART_COLORS.red, pointRadius: 5, pointHoverRadius: 7 }] },
+                options: { responsive: true, maintainAspectRatio: false, layout: { padding: 15 }, scales: { y: { beginAtZero: false, grid: { color: CHART_COLORS.grid }, ticks: { color: CHART_COLORS.text, font: { family: 'Inter' }, callback: (value) => `£${value}B` } }, x: { grid: { display: false }, ticks: { color: CHART_COLORS.text, font: { family: 'Inter', size: 14 } } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => `Sales: £${context.raw} Billion` }, titleFont: { family: 'Inter', weight: 'bold' }, bodyFont: { family: 'Inter' }, padding: 10, cornerRadius: 8, backgroundColor: 'rgba(0,0,0,0.8)' } } }
+            });
+
+            new Chart(document.getElementById('revenueMixChart').getContext('2d'), {
+                type: 'bar', data: { labels: years, datasets: [ { label: 'iPhone', data: revenueData['iPhone'], backgroundColor: CHART_COLORS.slate }, { label: 'Services', data: revenueData['Services'], backgroundColor: CHART_COLORS.red }, { label: 'Mac', data: revenueData['Mac'], backgroundColor: CHART_COLORS.midGrey }, { label: 'Wearables etc.', data: revenueData['Wearables etc.'], backgroundColor: CHART_COLORS.lightGrey }, { label: 'iPad', data: revenueData['iPad'], backgroundColor: '#a1a1aa' }] },
+                options: { responsive: true, maintainAspectRatio: false, layout: { padding: 15 }, scales: { y: { stacked: true, grid: { color: CHART_COLORS.grid }, ticks: { color: CHART_COLORS.text, font: { family: 'Inter' }, callback: (value) => `£${value}B` } }, x: { stacked: true, grid: { display: false }, ticks: { color: CHART_COLORS.text, font: { family: 'Inter', size: 14 } } } }, plugins: { legend: { position: 'bottom', labels: { color: CHART_COLORS.textDark, font: { family: 'Inter' } } }, tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => `${context.dataset.label}: £${context.raw} Billion` }, titleFont: { family: 'Inter', weight: 'bold' }, bodyFont: { family: 'Inter' }, padding: 10, cornerRadius: 8, backgroundColor: 'rgba(0,0,0,0.8)' } } }
+            });
+
+            new Chart(document.getElementById('rdSpendChart').getContext('2d'), {
+                type: 'bar', data: { labels: years, datasets: [{ label: 'R&D Spending (£ Billions)', data: rdData, backgroundColor: [CHART_COLORS.midGrey, CHART_COLORS.midGrey, CHART_COLORS.midGrey, CHART_COLORS.midGrey, CHART_COLORS.slate], borderRadius: 6 }] },
+                options: { responsive: true, maintainAspectRatio: false, layout: { padding: 15 }, scales: { y: { grid: { color: CHART_COLORS.grid }, ticks: { color: CHART_COLORS.text, font: { family: 'Inter' }, callback: (value) => `£${value}B` } }, x: { grid: { display: false }, ticks: { color: CHART_COLORS.text, font: { family: 'Inter', size: 14 } } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => `Spending: £${context.raw} Billion` }, titleFont: { family: 'Inter', weight: 'bold' }, bodyFont: { family: 'Inter' }, padding: 10, cornerRadius: 8, backgroundColor: 'rgba(0,0,0,0.8)' } } }
+            });
+
+            new Chart(document.getElementById('netIncomeChart').getContext('2d'), {
+                type: 'bar', data: { labels: years, datasets: [{ label: 'Net Income (£ Billions)', data: incomeData, backgroundColor: CHART_COLORS.midGrey, borderRadius: 6, order: 2 }, { label: 'Capital Return Programme (£ Billions)', data: returnsData, borderColor: CHART_COLORS.red, type: 'line', fill: false, tension: 0.4, order: 1 }] },
+                options: { responsive: true, maintainAspectRatio: false, layout: { padding: 15 }, scales: { y: { grid: { color: CHART_COLORS.grid }, ticks: { color: CHART_COLORS.text, font: { family: 'Inter' }, callback: (value) => `£${value}B` } } }, plugins: { legend: { position: 'bottom', labels: { color: CHART_COLORS.textDark, font: { family: 'Inter' }, usePointStyle: true } }, tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => `${context.dataset.label}: £${context.raw} Billion` }, titleFont: { family: 'Inter', weight: 'bold' }, bodyFont: { family: 'Inter' }, padding: 10, cornerRadius: 8, backgroundColor: 'rgba(0,0,0,0.8)' } } }
+            });
+
+            updateSlide();
+        });
+    </script>
+</body>
+</html>
